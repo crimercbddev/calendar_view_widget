@@ -3,15 +3,15 @@ import 'package:intl/intl.dart';
 
 class EventsView extends StatelessWidget {
   const EventsView(
-      {Key key,
-      this.events,
-      this.month,
-      this.currentDay,
-      this.onEventTapped,
-      this.titleField,
-      this.detailField,
-      this.dateField,
-      this.theme})
+      {Key? key,
+      required this.events,
+      required this.month,
+      required this.currentDay,
+      required this.onEventTapped,
+      required this.titleField,
+      required this.detailField,
+      required this.dateField,
+      required this.theme})
       : super(key: key);
 
   final Map<int, List> events;

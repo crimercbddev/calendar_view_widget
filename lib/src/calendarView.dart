@@ -8,7 +8,7 @@ import 'monthView.dart';
 
 class CalendarView extends StatefulWidget {
   CalendarView({
-    Key key,
+    Key? key,
     this.onEventTapped,
     this.titleField = 'name',
     this.detailField = 'location',
@@ -22,11 +22,11 @@ class CalendarView extends StatefulWidget {
   /// Events should have a title, detail, date, and unique id field
   /// Date field should be anything that DateTime.parse() can handle.
   /// Any updates passed through the stream will replace existing events.
-  final Stream<List<Map<String, String>>> eventStream;
+  final Stream<List<Map<String, String>>>? eventStream;
 
   ///Handler to use in your app should a user tap on an event in the event list.
   ///Passes the event (Map<String, String>) as a parameter.
-  final Function onEventTapped;
+  final Function? onEventTapped;
 
   ///Field on each event to use as the title for display in the event list.
   final String titleField;
@@ -42,23 +42,23 @@ class CalendarView extends StatefulWidget {
   final String separatorTitle;
 
   ///Theme used to style the calendar as needed.
-  final ThemeData theme;
+  final ThemeData? theme;
 
   @override
   _CalendarState createState() => _CalendarState();
 }
 
 class _CalendarState extends State<CalendarView> {
-  int _currentMonth;
-  int _currentYear;
-  int _currentDay;
-  Map<int, Map<int, Map<int, List>>> _events;
-  ThemeData _theme;
+  late int _currentMonth;
+  late int _currentYear;
+  late int _currentDay;
+  late Map<int, Map<int, Map<int, List>>> _events;
+  late ThemeData _theme;
 
   @override
   initState() {
     super.initState();
-    widget.eventStream.listen(_setEvents);
+    widget.eventStream?.listen(_setEvents);
     _currentMonth = DateTime.now().month;
     _currentYear = DateTime.now().year;
     _currentDay = 0;
@@ -86,7 +86,7 @@ class _CalendarState extends State<CalendarView> {
         continue;
       }
 
-      Map year = structuredEvents[date.year];
+      Map? year = structuredEvents[date.year];
       // guard null year
       if (year == null) {
         structuredEvents[date.year] = {
@@ -97,30 +97,31 @@ class _CalendarState extends State<CalendarView> {
         continue;
       }
 
-      Map month = year[date.month];
+      Map? month = year[date.month];
       // guard null month
       if (month == null) {
-        structuredEvents[date.year][date.month] = {
+        structuredEvents[date.year]?[date.month] = {
           date.day: [event]
         };
         continue;
       }
 
-      List day = month[date.day];
+      List? day = month[date.day];
       // guard null day
       if (day == null) {
-        structuredEvents[date.year][date.month][date.day] = [event];
+        structuredEvents[date.year]?[date.month]?[date.day] = [event];
         continue;
       }
 
       day.add(event);
-      structuredEvents[date.year][date.month][date.day] = day;
+      structuredEvents[date.year]?[date.month]?[date.day] = day;
     }
     setState(() => _events = structuredEvents);
   }
 
   bool _validEvent(Map<String, String> event) =>
-      event[widget.dateField] != null && event[widget.dateField].isNotEmpty;
+      event[widget.dateField] != null &&
+      (event[widget.dateField]?.isNotEmpty ?? false);
 
   String _getMonth(int month) => (MonthNames[month - 1]);
 
@@ -151,8 +152,8 @@ class _CalendarState extends State<CalendarView> {
   Map<int, List> _monthlyEvents() {
     if (_events != null && _events[_currentYear] != null) {
       final yearEvents = _events[_currentYear];
-      if (yearEvents[_currentMonth] != null) {
-        return yearEvents[_currentMonth];
+      if (yearEvents?[_currentMonth] != null) {
+        return yearEvents![_currentMonth]!;
       }
     }
     return {};
@@ -184,7 +185,7 @@ class _CalendarState extends State<CalendarView> {
               Text(
                 _currentYear.toString(),
                 style: _theme.textTheme.subhead
-                    .copyWith(fontWeight: FontWeight.bold),
+                    ?.copyWith(fontWeight: FontWeight.bold),
               )
             ],
           ),
@@ -227,7 +228,8 @@ class _CalendarState extends State<CalendarView> {
   }
 
   _onEventTapped(Map<String, String> event) {
-    widget.onEventTapped(event);
+    if (widget.onEventTapped == null) return;
+    widget.onEventTapped!(event);
   }
 
   @override
