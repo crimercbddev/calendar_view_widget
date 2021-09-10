@@ -1,6 +1,6 @@
 name: calendar_view_widget
 description: Calendar and events view widget for Flutter.
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/crimercbddev/calendar_view_widget
 
 environment:
