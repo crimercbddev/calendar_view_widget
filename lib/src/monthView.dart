@@ -25,8 +25,8 @@ class MonthView extends StatelessWidget {
                 child: Text(
               day.toString(),
               style: hasEvent
-                  ? theme.accentTextTheme.body1
-                  : theme.textTheme.body1,
+                  ? theme.accentTextTheme.bodyText1
+                  : theme.textTheme.bodyText1,
             )),
           ),
         ),
@@ -54,7 +54,7 @@ class MonthView extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: theme.textTheme.title,
+            style: theme.textTheme.subtitle1,
           ),
         ),
       )));

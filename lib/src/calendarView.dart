@@ -180,11 +180,11 @@ class _CalendarState extends State<CalendarView> {
             children: <Widget>[
               Text(
                 _getMonth(_currentMonth),
-                style: _theme.textTheme.display1,
+                style: _theme.textTheme.headline5,
               ),
               Text(
                 _currentYear.toString(),
-                style: _theme.textTheme.subhead
+                style: _theme.textTheme.subtitle2
                     ?.copyWith(fontWeight: FontWeight.bold),
               )
             ],
@@ -211,7 +211,7 @@ class _CalendarState extends State<CalendarView> {
             color: _theme.backgroundColor,
             child: Text(
               widget.separatorTitle,
-              style: _theme.accentTextTheme.display1,
+              style: _theme.accentTextTheme.headline5,
               textAlign: TextAlign.center,
             ),
           ),
