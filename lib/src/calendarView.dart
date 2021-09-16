@@ -239,37 +239,33 @@ class _CalendarState extends State<CalendarView> {
       builder: (context, stream) {
         return (!stream.hasData || stream.hasError)
             ? Container()
-            : Container(
-                child: Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      _header(),
-                      Divider(
-                        height: 0.0,
-                        color: _theme.dividerColor,
-                      ),
-                      MonthView(
-                        _currentYear,
-                        _currentMonth,
-                        _monthlyEvents(),
-                        onTapHandler: _daySelectHandler,
-                        theme: _theme,
-                      ),
-                      _separator(),
-                      EventsView(
-                        events: _monthlyEvents(),
-                        month: _currentMonth,
-                        currentDay: _currentDay,
-                        onEventTapped: _onEventTapped,
-                        titleField: widget.titleField,
-                        detailField: widget.detailField,
-                        dateField: widget.dateField,
-                        theme: _theme,
-                      ),
-                    ],
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  _header(),
+                  Divider(
+                    height: 0.0,
+                    color: _theme.dividerColor,
                   ),
-                ),
+                  MonthView(
+                    _currentYear,
+                    _currentMonth,
+                    _monthlyEvents(),
+                    onTapHandler: _daySelectHandler,
+                    theme: _theme,
+                  ),
+                  _separator(),
+                  EventsView(
+                    events: _monthlyEvents(),
+                    month: _currentMonth,
+                    currentDay: _currentDay,
+                    onEventTapped: _onEventTapped,
+                    titleField: widget.titleField,
+                    detailField: widget.detailField,
+                    dateField: widget.dateField,
+                    theme: _theme,
+                  ),
+                ],
               );
       },
     );
