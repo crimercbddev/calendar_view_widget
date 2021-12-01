@@ -106,7 +106,7 @@ class EventsView extends StatelessWidget {
       child: Container(
         color: theme.canvasColor,
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.only(top: 13),
           children: eventList(),
         ),
       ),
