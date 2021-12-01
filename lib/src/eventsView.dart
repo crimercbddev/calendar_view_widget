@@ -31,14 +31,12 @@ class EventsView extends StatelessWidget {
           shape: BoxShape.circle,
           color: theme.accentColor,
         ),
-        child: Column(
-          children: <Widget>[
-            Text(
-              day.toString(),
-              textAlign: TextAlign.center,
-              style: theme.accentTextTheme.subtitle1,
-            ),
-          ],
+        child: Center(
+          child: Text(
+            day.toString(),
+            textAlign: TextAlign.center,
+            style: theme.accentTextTheme.subtitle1,
+          ),
         ),
       );
 
@@ -79,9 +77,6 @@ class EventsView extends StatelessWidget {
                     ],
                   ],
                 ),
-              ),
-              Expanded(
-                child: Container(),
               ),
               dateBadge(day),
             ],
