@@ -23,24 +23,22 @@ class EventsView extends StatelessWidget {
   final String dateField;
   final ThemeData theme;
 
-  Widget dateBadge(day) => ConstrainedBox(
-        constraints: new BoxConstraints(minWidth: 75.0),
-        child: new Container(
-          margin: EdgeInsets.all(8.0),
-          padding: EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: theme.accentColor,
-          ),
-          child: Column(
-            children: <Widget>[
-              Text(
-                day.toString(),
-                textAlign: TextAlign.center,
-                style: theme.accentTextTheme.subtitle1,
-              ),
-            ],
-          ),
+  Widget dateBadge(day) => Container(
+        height: 44,
+        width: 44,
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: theme.accentColor,
+        ),
+        child: Column(
+          children: <Widget>[
+            Text(
+              day.toString(),
+              textAlign: TextAlign.center,
+              style: theme.accentTextTheme.subtitle1,
+            ),
+          ],
         ),
       );
 
@@ -56,7 +54,6 @@ class EventsView extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                flex: 8,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -64,14 +61,22 @@ class EventsView extends StatelessWidget {
                       event[titleField] ?? "",
                       style: theme.textTheme.headline6,
                     ),
-                    Text(
-                      event[detailField] ?? "",
-                      style: theme.textTheme.subtitle2,
-                    ),
-                    Text(
-                      timeString(event),
-                      style: theme.textTheme.subtitle2,
-                    )
+                    if (event[detailField] != null &&
+                        event[detailField]!.isNotEmpty) ...[
+                      SizedBox(height: 6),
+                      Text(
+                        event[detailField] ?? "",
+                        style: theme.textTheme.subtitle2,
+                      ),
+                    ],
+                    if (timeString(event) != null &&
+                        timeString(event).isNotEmpty) ...[
+                      SizedBox(height: 6),
+                      Text(
+                        timeString(event),
+                        style: theme.textTheme.subtitle2,
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -92,7 +97,7 @@ class EventsView extends StatelessWidget {
           list.add(eventRow(day, dayEvents[i]));
           list.add(Divider(
             color: theme.dividerColor,
-            height: 0.0,
+            height: 24.0,
           ));
         }
       }
