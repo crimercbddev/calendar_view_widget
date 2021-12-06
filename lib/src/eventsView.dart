@@ -60,7 +60,8 @@ class EventsView extends StatelessWidget {
                       style: theme.textTheme.headline6,
                     ),
                     if (event[detailField] != null &&
-                        event[detailField]!.isNotEmpty) ...[
+                        event[detailField]!.isNotEmpty &&
+                        !event[detailField]!.startsWith('http')) ...[
                       SizedBox(height: 6),
                       Text(
                         event[detailField] ?? "",
